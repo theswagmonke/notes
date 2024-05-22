@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:notes/splash_screen.dart';
+import 'package:notes/src/feature/splash/splash_screen.dart';
 
 void main() => runZonedGuarded(
       () => runApp(const App()),
