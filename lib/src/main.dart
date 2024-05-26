@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:developer';
 
-import 'package:notes/src/feature/splash/splash_screen.dart';
+import 'package:notes/src/feature/app/di.dart';
+import 'package:notes/src/feature/app/widget/app.dart';
 
-void main() => runZonedGuarded(
-      () => runApp(const App()),
-      (error, stackTrace) => print('Top level exception:\n$error,\n$stackTrace'),
-    );
-
-class App extends StatelessWidget {
-  const App({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    );
-  }
+Future<void> main() async {
+  runZonedGuarded(
+    () async {
+      await initializeDependencies();
+      runApp(const App());
+    },
+    (error, stackTrace) => log('Top level exception:\n$error,\n$stackTrace'),
+  );
 }
-
