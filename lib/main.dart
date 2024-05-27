@@ -4,11 +4,13 @@ import 'dart:developer';
 
 import 'package:notes/src/feature/app/di.dart';
 import 'package:notes/src/feature/app/widget/app.dart';
+import 'package:notes/src/feature/notes/data/notes_db.dart';
 
 Future<void> main() async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      await NotesDatabase.instance.database;
       await initializeDependencies();
       runApp(const App());
     },

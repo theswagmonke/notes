@@ -11,6 +11,7 @@ Future<void> initializeDependencies() async {
   NotesDatabase database = NotesDatabase.instance;
 
   sl.registerSingleton<NotesDatabase>(database);
-  sl.registerFactory<NotesBloc>(() => NotesBloc(sl()));
   sl.registerSingleton<NotesRepository>(NotesRepoImpl(sl()));
+
+  sl.registerFactory<NotesBloc>(() => NotesBloc(sl()));
 }

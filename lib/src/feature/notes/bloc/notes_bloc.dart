@@ -45,7 +45,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       emit(const NotesState.loading());
       await repository.addNote(event.note);
       final updatedNotes = await updateNotes();
-      // log(updatedNotes.toString());
+      log(updatedNotes.toString());
       emit(NotesState.loaded(updatedNotes));
     } on Object catch (error, stackTrace) {
       emit(const NotesState.error());
@@ -61,6 +61,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       emit(const NotesState.loading());
       await repository.deleteNote(event.note);
       final updatedNotes = await updateNotes();
+      log(updatedNotes.toString());
       emit(NotesState.loaded(updatedNotes));
     } on Object catch (error, stackTrace) {
       emit(const NotesState.error());
@@ -76,6 +77,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       emit(const NotesState.loading());
       await repository.editNote(event.note);
       final updatedNotes = await updateNotes();
+      log(updatedNotes.toString());
       emit(NotesState.loaded(updatedNotes));
     } on Object catch (error, stackTrace) {
       emit(const NotesState.error());
