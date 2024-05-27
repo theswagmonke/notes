@@ -8,6 +8,7 @@ import 'package:notes/src/feature/app/widget/app.dart';
 Future<void> main() async {
   runZonedGuarded(
     () async {
+      WidgetsFlutterBinding.ensureInitialized();
       await initializeDependencies();
       runApp(const App());
     },
