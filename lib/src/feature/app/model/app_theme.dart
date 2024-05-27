@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final ThemeData _lightTheme = ThemeData(
     useMaterial3: true,
-    colorSchemeSeed: Colors.black,
-    brightness: Brightness.light,
-    // colorScheme: const ColorScheme.light(
-    //   brightness: Brightness.light,
-    // ),
+    colorScheme: const ColorScheme.light(
+      brightness: Brightness.light,
+      primary: Colors.black,
+    ),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.white,
     ),
     listTileTheme: const ListTileThemeData(
@@ -23,19 +23,21 @@ class AppTheme {
       thumbColor: const WidgetStatePropertyAll(Colors.black),
       trackColor: const WidgetStatePropertyAll(Colors.white),
       overlayColor: WidgetStatePropertyAll(Colors.black.withOpacity(0.15)),
+      trackOutlineWidth: const WidgetStatePropertyAll(1),
     ),
+
   );
 
   static final ThemeData _darkTheme = ThemeData(
     useMaterial3: true,
-    colorSchemeSeed: Colors.white,
-    brightness: Brightness.dark,
-    // colorScheme: const ColorScheme.dark(
-    //   brightness: Brightness.dark,
-    // ),
+    colorScheme: const ColorScheme.dark(
+      brightness: Brightness.dark,
+      primary: Colors.white,
+    ),
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: const AppBarTheme(
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.black,
     ),
     listTileTheme: const ListTileThemeData(
@@ -52,6 +54,7 @@ class AppTheme {
       thumbColor: const WidgetStatePropertyAll(Colors.black),
       trackColor: const WidgetStatePropertyAll(Colors.white),
       overlayColor: WidgetStatePropertyAll(Colors.black.withOpacity(0.15)),
+      trackOutlineWidth: const WidgetStatePropertyAll(1),
     ),
   );
 

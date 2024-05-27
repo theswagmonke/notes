@@ -115,15 +115,16 @@ class _NotesScreenState extends State<NotesScreen> {
                                     contentPadding: const EdgeInsets.only(left: 25),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(32),
-                                      borderSide: const BorderSide(),
                                     ),
                                   ),
                                   onChanged: (value) => _filterNotes(value),
                                 ),
                               ),
+                              const SizedBox(height: 16),
                               filteredNotes!.isNotEmpty
                                   ? ListView.separated(
                                       shrinkWrap: true,
+                                      clipBehavior: Clip.hardEdge,
                                       itemCount: filteredNotes!.length,
                                       itemBuilder: (context, index) {
                                         return ListTile(
