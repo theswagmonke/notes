@@ -72,6 +72,7 @@ class _NotesScreenState extends State<NotesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Заметки'),
+        centerTitle: true,
         leading: Padding(
           padding: const EdgeInsets.only(left: 24.0),
           child: Switch(
@@ -93,7 +94,7 @@ class _NotesScreenState extends State<NotesScreen> {
         child: BlocBuilder<NotesBloc, NotesState>(
           builder: (context, state) {
             return state.maybeWhen(
-              orElse: () => const CircularProgressIndicator(),
+              orElse: () => const Center(child: CircularProgressIndicator()),
               loading: () => const Center(child: CircularProgressIndicator()),
               loaded: (list) {
                 if (allNotes == null || list != allNotes) {

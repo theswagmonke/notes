@@ -29,8 +29,37 @@ class NotesDatabase {
       path,
       version: 1,
       onCreate: _createDB,
-      onUpgrade: (db, oldVersion, newVersion) {}
+      onOpen: (db) async {
+        bool needsUpgrade = await _checkAndUpgradeDB(db);
+        if (needsUpgrade) {
+          await _upgradeDB(db);
+        }
+      },
     );
+  }
+
+  Future<bool> _checkAndUpgradeDB(Database db) async {
+    log('Checking database integrity');
+
+    try {
+      List<Map> result = await db.rawQuery('PRAGMA table_info(notes)');
+      List<String> columns = result.map((column) => column['name'] as String).toList();
+
+      const expectedColumns = ['id', 'title', 'text', 'category'];
+
+      for (var column in expectedColumns) {
+        if (!columns.contains(column)) {
+          log('Column $column is missing in the notes table');
+          return true;
+        }
+      }
+    } catch (e) {
+      log('Error checking database integrity: $e');
+      return true;
+    }
+
+    log('Database integrity check passed');
+    return false;
   }
 
   Future _createDB(Database db, int version) async {
@@ -51,6 +80,19 @@ class NotesDatabase {
     }).catchError((error) {
       log('Error creating notes table: $error');
     });
+  }
+
+  Future _upgradeDB(Database db) async {
+    log('Upgrading notes table due to detected conflict');
+
+    await db.execute('DROP TABLE IF EXISTS notes')
+        .then((value) {
+      log('Existing notes table dropped');
+    }).catchError((error) {
+      log('Error dropping existing notes table: $error');
+    });
+
+    await _createDB(db, 1);
   }
 
   Future<Note> create(Note note) async {
